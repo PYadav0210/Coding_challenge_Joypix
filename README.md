@@ -1,96 +1,138 @@
-# **Next.js Coding Challenge: Gamer Discussion Snippets**
+# Fullstack Next JS Project with Database connected using Supabase
 
-![pixy-coding-challenge](https://raw.githubusercontent.com/company-recruitment/coding-challenge/main/assets/pixy-coding-challenge.png)
+## Overview
 
-[![language](https://img.shields.io/badge/language-English-121212.svg?style=for-the-badge&labelColor=121212f2&color=9945FF)](https://github.com/company-recruitment/coding-challenge/blob/main/README.md)
-[![language](https://img.shields.io/badge/language-German-121212.svg?style=for-the-badge&labelColor=121212f2&color=9945FF)](https://github.com/company-recruitment/coding-challenge/blob/main/README-de.md)
+This project is a simple web application that allows users to create and display discussion snippets. It uses Next.js, Tailwind CSS, Supabase (PostgreSQL), and nyxbui.design components to provide a functional and stylish interface.
 
-Hi 👋! Thank you for taking the time to participate in this coding challenge. Your task is to develop a small but functional web application that provides a basic discussion feature. This task is designed to give us insight into your skills in Next.js, Tailwind CSS, PostgreSQL (Supabase), and the integration of UI components from [nyxbui.design](https://nyxbui.design).
+## Table of Contents
 
-#### **What We Expect**
+1. [Setup Instructions](#setup-instructions)
+2. [Project Structure](#project-structure)
+3. [Database Setup](#database-setup)
+4. [Frontend Development](#frontend-development)
+5. [Push to GitHub](#push-to-github)
+6. [Additional Notes](#additional-notes)
 
-We expect this task to take about 2-3 hours. The focus is on writing clean, well-structured code and implementing the key features.
+## Setup Instructions
 
-#### **The Challenge**
+### Prerequisites
 
-Develop a simple application that allows users to create and display **short discussion snippets**. These snippets could be short opinions or questions about a specific game or topic.
+Ensure you have the following installed:
+- Node.js (v18.x or later)
+- npm or yarn
+- Git
 
-**Features:**
+### Clone the Repository
 
-1. **Create and Display Snippets:**
+First, clone the base project repository:
 
-   -  Users should be able to create short discussion posts (snippets) via a simple form.
-   -  These snippets should be stored in a PostgreSQL database (via Supabase).
-   -  A list of snippets should be displayed on the main page.
+```bash
+git clone https://github.com/company-recruitment/coding-challenge.git
+cd coding-challenge
 
-2. **Use `nyxbui.design` Components:**
-   -  Use components from `nyxbui.design` for the form and the display of snippets.
+### Install Dependencies
 
-#### **Database Requirements**
+Install the project dependencies:
 
--  **Mandatory Requirement:** The application must include a database structure that allows for storing and retrieving discussion snippets.
--  **Open-ended:** It is up to you how you design the database structure. Consider what information should be stored (e.g., content, timestamp, user information, etc.) and how best to structure it.
+npm install
 
-#### **Supabase Setup**
+### Set Up Supabase
 
-To ensure all applicants have an optimal experience, you will set up your own Supabase project. Here is a step-by-step guide:
+1. *Create a Supabase Account:*
+   - Go to [Supabase](https://supabase.com) and sign up.
+   - Create a new project and note the API URL and anon key.
 
-1. **Create a Supabase Account:**
+2. *Create Database Table:*
+   - Go to the Supabase dashboard.
+   - Create a new table named 'snippets' with the following columns:
+     - id (UUID, Primary Key, Default: gen_random_uuid())
+     - content (Text, Not Null)
+     - created_at (Timestamp, Default: now())
+     - user (Text, Not Null)
 
-   -  Go to [supabase.com](https://supabase.com) and sign up.
-   -  Create a new project. Note down the `API URL` and `anon key` that you will need later.
+3. *Configure Environment Variables:*
+   - Create a .env.local file in the root directory and add your Supabase credentials:
 
-2. **Create the Necessary Table(s):**
+```
+NEXT_PUBLIC_SUPABASE_URL=https://qgkubtlnwoinkvqiabia.supabase.co
+NEXT_PUBLIC_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFna3VidGxud29pbmt2cWlhYmlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjM3NDI0ODEsImV4cCI6MjAzOTMxODQ4MX0.qnJR-KrHb0eBL8jwTpbYEjiAN-J8mcGYYerZV7qxlhc
+```
+     
 
-   -  Think about what tables you need and what columns make sense. This could be a table for snippets where the content and other relevant information are stored.
+## Project Structure
 
-3. **Configure Your Next.js Project:**
+- **pages/index.tsx**: Main page that displays the form and list of snippets.
+- **components/ui/**: Contains reusable UI components like Button, Textarea, and ShineBorder.
+- **supabaseClient.ts**: Initializes the Supabase client for database interactions.
 
-   -  Use the provided `.env.local.example` file to configure the Supabase URL and anon key in your `.env.local` file:
+## Database Setup
 
-   ```plaintext
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-   NEXT_PUBLIC_SUPABASE_KEY=your-anon-key
+1. *Initialize Supabase Client:*
+
+   Create supabaseClient.ts to initialize the Supabase client:
+
+   
+   import { createClient } from '@supabase/supabase-js';
+
+   export const supabase = createClient(
+     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+     process.env.NEXT_PUBLIC_SUPABASE_KEY!
+   );
+   
+
+2. *Database Schema:*
+
+   Ensure your snippets table is created with the necessary columns.
+
+## Frontend Development
+
+### Adding Style (NYXB UI)
+ 
+1. *Style Components:*
+
+   Utilize Tailwind CSS and nyxbui.design components for styling. Adjust the classes as needed to improve visual appeal.
+   Firstly, we need to build the nyxb UI in our project in the following way:
+
    ```
-
-4. **Install Supabase:**
-
-   -  If not already done, install the Supabase JavaScript SDK:
-
-   ```bash
-   npm install @supabase/supabase-js
+   npx nyxbui@latest init
    ```
+   And then, we have used buttons and text area using the following command:
+    ```
+    npx nyxbui@latest add button
+    npx nyxbui@latest add textarea
+     ```
+   And in the code, then these elements can be imported.
+ 
+## Push to GitHub
 
-5. **Connect Your Project to Supabase:**
-   -  In your Next.js project, you can now use the Supabase client library to access your database.
+### Initialize Git and Add Remote
 
-#### **Preconfigured Project**
+If your project isn’t already a Git repository:
 
-We provide you with a base project preconfigured with Next.js, Tailwind CSS, and `nyxbui.design`. You just need to clone it and follow the steps above to set up Supabase.
+git init
+git remote add origin https://github.com/PYadav0210/Coding_challenge_Joypix
 
-1. **Clone the Repository:**
+### Add, Commit, and Push
 
-   ```bash
-   git clone https://github.com/company-recruitment/coding-challenge.git
-   cd coding-challenge
-   ```
+1. *Add All Files to Staging:*
 
-2. **Install Dependencies:**
+   
+   git add .
+   
 
-   ```bash
-   npm install
-   ```
+2. *Commit Changes:*
 
-3. **Run the Development Server:**
-   ```bash
-   npm run dev
-   ```
+   
+   git commit -m "Initial commit with project setup and UI enhancements"
+   
 
-#### **FAQs**
+3. *Push to Remote Repository:*
 
--  **What if I have trouble setting up Supabase?** The Supabase documentation is a good starting point. This task is also designed to test your ability to use new tools and find your way independently.
--  **Should I implement specific features?** You can prioritize the features you think are most important. We are looking for a solid foundation that shows how you solve challenges.
+   If the remote repository has no existing history:
 
-#### **Good Luck! 💪**
+   
+   git push -u origin main
+   
 
-Once you are done, send us a confirmation email. After your submission, we will get in touch with you.
+Thank you for setting up and contributing to the project!
+```
