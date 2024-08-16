@@ -62,7 +62,7 @@ NEXT_PUBLIC_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 ## Project Structure
 
-- **pages/index.tsx**: Main page that displays the form and list of snippets.
+- **app/page.tsx**: Main page that displays the form and list of snippets.
 - **components/ui/**: Contains reusable UI components like Button, Textarea, and ShineBorder.
 - **supabaseClient.ts**: Initializes the Supabase client for database interactions.
 
@@ -102,7 +102,7 @@ NEXT_PUBLIC_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
     npx nyxbui@latest add button
     npx nyxbui@latest add textarea
      ```
-   And in the code, then these elements can be imported.
+   And in the code in page.tsx, then these elements can be imported.
  
 ## Push to GitHub
 
