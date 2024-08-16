@@ -134,6 +134,4 @@ git remote add origin https://github.com/PYadav0210/Coding_challenge_Joypix
    
    git push -u origin main
    
-
-Thank you for setting up and contributing to the project!
 ```
