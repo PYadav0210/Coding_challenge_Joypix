@@ -26,9 +26,10 @@ Ensure you have the following installed:
 
 First, clone the base project repository:
 
-```bash
+```
 git clone https://github.com/company-recruitment/coding-challenge.git
 cd coding-challenge
+```
 
 ### Install Dependencies
 
